@@ -1,15 +1,15 @@
 **Link de los videos**
 
-Juan Manuel Arciniegas
+_Juan Manuel Arciniegas_
 
 https://upbeduco-my.sharepoint.com/:v:/g/personal/juan_arciniegasm_upb_edu_co/EZ-rT2l6eXNGsbnRifBYfqUBF5WnFTCm8KvVGiWIziL0Xw?e=co7Xpq
 
-Valentina Franco 
+_Valentina Franco_ 
 
 https://youtu.be/a_aVFfjDW4w
 
-Martín Zuluaga
+_Martín Zuluaga_
 
-Maria José Henao
+_Maria José Henao_
 
-Juan Mandón 
+_Juan Mandón_
