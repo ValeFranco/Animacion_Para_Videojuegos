@@ -520,7 +520,7 @@ PrefabInstance:
     - target: {fileID: 7643911633956637285, guid: 2087111ababe0ee47a6d26bec92ec083,
         type: 3}
       propertyPath: m_Name
-      value: MikeyPrefab
+      value: MikeyPrefab Variant
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2264467756275915820, guid: 2087111ababe0ee47a6d26bec92ec083, type: 3}
