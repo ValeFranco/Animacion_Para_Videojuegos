@@ -25,6 +25,7 @@ public class MovementSystem : MonoBehaviour
     float idleTimer, idleTimerMax = 12f;
     float attackTimer;
 
+    bool stopInput;
 
     private void Awake()
     {
@@ -82,10 +83,10 @@ public class MovementSystem : MonoBehaviour
             print("attacking");
             attackTimer += Time.deltaTime;
             animator.SetFloat("IsAttacking", attackTimer);
-
+            stopInput = true;
             //attacking
         }
-        else attackTimer = 0f; animator.SetFloat("IsAttacking", attackTimer);
+        else attackTimer = 0f; animator.SetFloat("IsAttacking", attackTimer); stopInput = false;
 
 
 
@@ -98,12 +99,25 @@ public class MovementSystem : MonoBehaviour
 
             //attacking
         }
+
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            animator.SetTrigger("IsGetHit");
+            stopInput = true;
+            //gethit
+        }
+        else stopInput = false;
+
     }
 
     private void FixedUpdate()
     {
-        RotateCharacter(horizontalInput);
-        MoveCharacter(verticalInput);
+        if (!stopInput)
+        {
+            RotateCharacter(horizontalInput);
+            MoveCharacter(verticalInput);
+        }
+        
     }
 
     private void RotateCharacter(float horizontalInput)
