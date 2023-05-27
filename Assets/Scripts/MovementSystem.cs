@@ -5,30 +5,105 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class MovementSystem : MonoBehaviour
 {
+    float horizontalInput;
+    float verticalInput;
 
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float rotationSpeed = 50f;
-    [SerializeField] private float groundCheckDistance = 0.2f;
-    [SerializeField] private LayerMask groundLayer;
+    private float currentSpeed = 5f;
+    private float regularSpeed = 4f;
+    private float sprintSpeed = 10f;
+    private float rotationSpeed = 300f;
+    private float groundCheckDistance = 0.6f;
+
+
+    [SerializeField] private float jumpForce = 10f;
 
     private Rigidbody rb;
+
     private bool isGrounded;
+
+    Animator animator;
+    float idleTimer, idleTimerMax = 12f;
+    float attackTimer;
+
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation;
+        animator = GetComponent<Animator>();
+    }
+
+    private void Update() //the code i wrote is absolute dogshit, i was watching gnome videos instead of working
+    {
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
+
+        animator.SetFloat("MoveInput", Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput)); //execute anim if player moves (WASD)
+
+        if (Mathf.Abs(horizontalInput)+Mathf.Abs(verticalInput)<0.1f) //idle logic
+        {
+            idleTimer += Time.deltaTime;
+            if (idleTimer>idleTimerMax)
+            {
+                idleTimer = 0f;
+            }
+            animator.SetFloat("IdleTime", idleTimer);
+
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            print("Sprinting");
+            currentSpeed = sprintSpeed;
+            //sprinting
+            animator.SetBool("IsRunning", true);
+
+        }
+        else
+        {
+            currentSpeed = regularSpeed;
+            animator.SetBool("IsRunning", false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            print("Jumping");
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            //jumping
+            animator.SetTrigger("IsJumping");
+        }
+        else
+        {
+            
+        }
+
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            print("attacking");
+            attackTimer += Time.deltaTime;
+            animator.SetFloat("IsAttacking", attackTimer);
+
+            //attacking
+        }
+        else attackTimer = 0f; animator.SetFloat("IsAttacking", attackTimer);
+
+
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            print("died");
+            animator.SetBool("IsDead", true);
+            print("KILLING MOVEMENT SYSTEM AS PLAYER HAS DIED!");
+            Destroy(this);
+
+            //attacking
+        }
     }
 
     private void FixedUpdate()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-
         RotateCharacter(horizontalInput);
         MoveCharacter(verticalInput);
-
-        ApplyGravity();
     }
 
     private void RotateCharacter(float horizontalInput)
@@ -46,31 +121,8 @@ public class MovementSystem : MonoBehaviour
         if (Mathf.Approximately(verticalInput, 0f))
             return;
 
-        Vector3 movement = transform.forward * verticalInput * moveSpeed * Time.fixedDeltaTime;
+        Vector3 movement = transform.forward * verticalInput * currentSpeed * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + movement);
     }
-
-    private void ApplyGravity()
-    {
-        isGrounded = CheckGrounded();
-
-        if (!isGrounded)
-        {
-            Vector3 gravity = Physics.gravity;
-            rb.AddForce(gravity, ForceMode.Acceleration);
-        }
-    }
-
-    private bool CheckGrounded()
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, groundCheckDistance, groundLayer))
-        {
-            return true;
-        }
-
-        return false;
-    }
-
 
 }
