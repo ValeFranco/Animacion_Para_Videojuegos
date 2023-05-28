@@ -6,6 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Old/Valentina Franco Avalos/Scenes/Mikey Rig.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/Scene Loader.unity
+    guid: 8c7e559bc71d8fe4e850ea13238692af
+  - enabled: 1
+    path: Assets/Scenes/Juanma.unity
+    guid: baee456573d44a5499d8b08e063bf4ec
+  - enabled: 1
+    path: Assets/Scenes/Majo.unity
+    guid: 88b7fec4294376a4d9b85b3f9a934e71
+  - enabled: 1
+    path: Assets/Scenes/Mandon.unity
+    guid: 3f95ee37bd6d4504ba7a2b05f3c1302f
+  - enabled: 1
+    path: Assets/Scenes/Martin.unity
+    guid: 80f7dbc9bd96a684184a09064d1d98ae
+  - enabled: 1
+    path: Assets/Scenes/Vale.unity
+    guid: cb65c1e3de9db0545a3dd92be0619690
   m_configObjects: {}
