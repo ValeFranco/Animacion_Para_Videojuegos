@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -287,6 +287,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Valentina
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 357a24c12b5fc0b4b9edc44a394ea5d6,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 1d2057a369b950e4bba5e0eeddcaf35d, type: 2}
     - target: {fileID: 9032067611303765916, guid: 357a24c12b5fc0b4b9edc44a394ea5d6,
         type: 3}
       propertyPath: m_IsActive
