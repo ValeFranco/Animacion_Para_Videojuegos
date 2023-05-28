@@ -16,6 +16,7 @@ public class MovementSystem : MonoBehaviour
 
 
     [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private bool isAnimatorOutside;
 
     private Rigidbody rb;
 
@@ -31,7 +32,16 @@ public class MovementSystem : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation;
-        animator = GetComponent<Animator>();
+        
+        if (isAnimatorOutside)
+        {
+            animator = GetComponentInChildren<Animator>();
+        }
+        else
+        {
+            animator = GetComponent<Animator>();
+        }
+        
     }
 
     private void Update() //the code i wrote is absolute dogshit, i was watching gnome videos instead of working
